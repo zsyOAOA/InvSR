@@ -19,7 +19,7 @@
 ## Requirements
 * Python 3.10, Pytorch 2.4.0, [xformers](https://github.com/facebookresearch/xformers) 0.0.27.post2
 * More detail (See [environment.yaml](environment.yaml))
-A suitable [conda](https://conda.io/) environment named `invsr` can be created and activated with:
+* A suitable [conda](https://conda.io/) environment named `invsr` can be created and activated with:
 
 ```
 conda create -n invsr python=3.10
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 ## Applications
 ### :point_right: Real-world Image Super-resolution
-[<img src="assets/real-7.png" height="280"/>](https://imgsli.com/MzI2MTU5) [<img src="assets/real-1.png" height="280"/>](https://imgsli.com/MzI2MTUx) [<img src="assets/real-2.png" height="280"/>](https://imgsli.com/MzI2MTUy) <!--[<img src="assets/real-3.png" height="256"/>](https://imgsli.com/MzI2MTUz)-->
+[<img src="assets/real-7.png" height="240"/>](https://imgsli.com/MzI2MTU5) [<img src="assets/real-1.png" height="240"/>](https://imgsli.com/MzI2MTUx) [<img src="assets/real-2.png" height="240"/>](https://imgsli.com/MzI2MTUy)
 [<img src="assets/real-4.png" height="430"/>](https://imgsli.com/MzI2MTU0) [<img src="assets/real-6.png" height="430"/>](https://imgsli.com/MzI2MTU3) [<img src="assets/real-5.png" height="430"/>](https://imgsli.com/MzI2MTU1)
 
 ### :point_right: General Image Inhancement
