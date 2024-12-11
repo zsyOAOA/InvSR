@@ -37,6 +37,9 @@ def get_parser(**parser_kwargs):
     parser.add_argument(
         "--color_fix", type=str, default='', choices=['wavelet', 'ycbcr'], help="Fix the color shift",
     )
+    parser.add_argument(
+        "--chopping_size", type=int, default=128, help="Chopping size when dealing large images"
+    )
     args = parser.parse_args()
 
     return args
@@ -77,18 +80,20 @@ def get_configs(args):
         started_ckpt_name = "noise_predictor_sd_turbo_v5.pth"
         started_ckpt_dir = "./weights"
         util_common.mkdir(started_ckpt_dir, delete=False, parents=True)
-        started_ckpt_path = str(Path(started_ckpt_dir) / started_ckpt_name)
-        load_file_from_url(
-            url="https://huggingface.co/OAOA/InvSR/resolve/main/noise_predictor_sd_turbo_v5.pth",
-            model_dir=started_ckpt_dir,
-            progress=True,
-            file_name=started_ckpt_name,
-        )
-    configs.model_start.ckpt_path = started_ckpt_path
+        started_ckpt_path = Path(started_ckpt_dir) / started_ckpt_name
+        if not started_ckpt_path.exists():
+            load_file_from_url(
+                url="https://huggingface.co/OAOA/InvSR/resolve/main/noise_predictor_sd_turbo_v5.pth",
+                model_dir=started_ckpt_dir,
+                progress=True,
+                file_name=started_ckpt_name,
+            )
+    configs.model_start.ckpt_path = str(started_ckpt_path)
 
+    configs.bs = args.bs
     configs.tiled_vae = args.tiled_vae
     configs.color_fix = args.color_fix
-    configs.bs = args.bs
+    configs.basesr.chopping.pch_size = args.chopping_size
 
     return configs
 

@@ -134,8 +134,6 @@ class InvSamplerSR(BaseSampler):
             diffusion_sf = self.sd_pipe.transformer.patch_size
         mod_lq = vae_sf // self.configs.basesr.sf * diffusion_sf
         idle_pch_size = self.configs.basesr.chopping.pch_size
-        if ori_h_lq * ori_w_lq >= 512 ** 2:
-            idle_pch_size = 256
 
         if min(im_cond.shape[-2:]) >= idle_pch_size:
             pad_h_up = pad_w_left = 0
