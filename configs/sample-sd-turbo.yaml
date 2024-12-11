@@ -1,0 +1,91 @@
+seed: 12345
+
+
+# Super-resolution settings
+basesr:
+  sf: 4
+  chopping:     # for latent diffusion
+    pch_size: 128
+    weight_type: Gaussian
+    extra_bs: 16      # 16 ----> 26G memory
+
+# VAE settings
+tiled_vae: True
+latent_tiled_size: 128
+sample_tiled_size: 1024
+gradient_checkpointing_vae: True
+sliced_vae: False
+
+# classifer-free guidance
+cfg_scale: 1.0
+
+# sampling settings 
+start_timesteps: 200
+
+# Stable Diffusion 
+base_model: sd-turbo
+sd_pipe:
+  target: diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline
+  enable_grad_checkpoint: True
+  params:
+    pretrained_model_name_or_path: stabilityai/sd-turbo
+    cache_dir: /mnt/sfs-common/zsyue/modelbase/stable-diffusion/sd-turbo
+    use_safetensors: True
+    torch_dtype: torch.float16
+
+model_start:
+  target: diffusers.models.autoencoders.NoisePredictor
+  ckpt_path: ~           # For initializing
+  params:
+    in_channels: 3
+    down_block_types:
+      - AttnDownBlock2D
+      - AttnDownBlock2D
+    up_block_types:
+      - AttnUpBlock2D
+      - AttnUpBlock2D
+    block_out_channels:
+      - 256    # 192, 256
+      - 512    # 384, 512
+    layers_per_block: 
+      - 3
+      - 3
+    act_fn: silu
+    latent_channels: 4
+    norm_num_groups: 32
+    sample_size: 128
+    mid_block_add_attention: True
+    resnet_time_scale_shift: default
+    temb_channels: 512
+    attention_head_dim: 64 
+    freq_shift: 0
+    flip_sin_to_cos: True
+    double_z: True
+
+model_middle:
+  target: diffusers.models.autoencoders.NoisePredictor
+  params:
+    in_channels: 3
+    down_block_types:
+      - AttnDownBlock2D
+      - AttnDownBlock2D
+    up_block_types:
+      - AttnUpBlock2D
+      - AttnUpBlock2D
+    block_out_channels:
+      - 256    # 192, 256
+      - 512    # 384, 512
+    layers_per_block: 
+      - 3
+      - 3
+    act_fn: silu
+    latent_channels: 4
+    norm_num_groups: 32
+    sample_size: 128
+    mid_block_add_attention: True
+    resnet_time_scale_shift: default
+    temb_channels: 512
+    attention_head_dim: 64 
+    freq_shift: 0
+    flip_sin_to_cos: True
+    double_z: True

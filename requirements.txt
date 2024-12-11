@@ -1,0 +1,10 @@
+transformers==4.46.0
+opencv-python==4.10.0.84
+bitsandbytes
+sentencepiece
+protobuf
+python-box
+omegaconf
+loguru
+pyiqa
+einops
