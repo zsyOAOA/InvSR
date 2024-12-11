@@ -32,7 +32,8 @@ pip install -r requirements.txt
 
 ## Applications
 ### :point_right: Real-world Image Super-resolution
-[<img src="assets/real-7.png" height="240"/>](https://imgsli.com/MzI2MTU5) [<img src="assets/real-1.png" height="240"/>](https://imgsli.com/MzI2MTUx) [<img src="assets/real-2.png" height="240"/>](https://imgsli.com/MzI2MTUy)
+[<img src="assets/real-7.png" height="235"/>](https://imgsli.com/MzI2MTU5) [<img src="assets/real-1.png" height="235"/>](https://imgsli.com/MzI2MTUx) [<img src="assets/real-2.png" height="235"/>](https://imgsli.com/MzI2MTUy)
+
 [<img src="assets/real-4.png" height="430"/>](https://imgsli.com/MzI2MTU0) [<img src="assets/real-6.png" height="430"/>](https://imgsli.com/MzI2MTU3) [<img src="assets/real-5.png" height="430"/>](https://imgsli.com/MzI2MTU1)
 
 ### :point_right: General Image Inhancement
