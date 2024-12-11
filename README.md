@@ -24,7 +24,7 @@
 ```
 conda create -n invsr python=3.10
 conda activate invsr
-pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121s
+pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
 pip install -U xformers==0.0.27.post2 --index-url https://download.pytorch.org/whl/cu121
 pip install -e ".[torch]"
 pip install -r requirements.txt
@@ -33,16 +33,15 @@ pip install -r requirements.txt
 ## Applications
 ### :point_right: Real-world Image Super-resolution
 [<img src="assets/real-7.png" height="235"/>](https://imgsli.com/MzI2MTU5) [<img src="assets/real-1.png" height="235"/>](https://imgsli.com/MzI2MTUx) [<img src="assets/real-2.png" height="235"/>](https://imgsli.com/MzI2MTUy)
-
-[<img src="assets/real-4.png" height="430"/>](https://imgsli.com/MzI2MTU0) [<img src="assets/real-6.png" height="430"/>](https://imgsli.com/MzI2MTU3) [<img src="assets/real-5.png" height="430"/>](https://imgsli.com/MzI2MTU1)
+[<img src="assets/real-4.png" height="361"/>](https://imgsli.com/MzI2MTU0) [<img src="assets/real-6.png" height="361"/>](https://imgsli.com/MzI2MTU3) [<img src="assets/real-5.png" height="361"/>](https://imgsli.com/MzI2MTU1)
 
 ### :point_right: General Image Inhancement
-[<img src="assets/enhance-1.png" height="294"/>](https://imgsli.com/MzI2MTYw) [<img src="assets/enhance-2.png" height="294"/>](https://imgsli.com/MzI2MTYy) 
-[<img src="assets/enhance-3.png" height="247.5"/>](https://imgsli.com/MzI2MjAx) [<img src="assets/enhance-4.png" height="247.5"/>](https://imgsli.com/MzI2MjAz) [<img src="assets/enhance-5.png" height="247.5"/>](https://imgsli.com/MzI2MjA0)
+[<img src="assets/enhance-1.png" height="246.5"/>](https://imgsli.com/MzI2MTYw) [<img src="assets/enhance-2.png" height="246.5"/>](https://imgsli.com/MzI2MTYy) 
+[<img src="assets/enhance-3.png" height="207"/>](https://imgsli.com/MzI2MjAx) [<img src="assets/enhance-4.png" height="207"/>](https://imgsli.com/MzI2MjAz) [<img src="assets/enhance-5.png" height="207"/>](https://imgsli.com/MzI2MjA0)
 
 ### :point_right: AIGC Image Inhancement
-[<img src="assets/sdxl-1.png" height="324"/>](https://imgsli.com/MzI2MjQy) [<img src="assets/sdxl-2.png" height="324"/>](https://imgsli.com/MzI2MjQ1) [<img src="assets/sdxl-3.png" height="324"/>](https://imgsli.com/MzI2MjQ3)
-[<img src="assets/flux-1.png" height="324"/>](https://imgsli.com/MzI2MjQ5) [<img src="assets/flux-2.png" height="324"/>](https://imgsli.com/MzI2MjUw) [<img src="assets/flux-3.png" height="324"/>](https://imgsli.com/MzI2MjUx)
+[<img src="assets/sdxl-1.png" height="272"/>](https://imgsli.com/MzI2MjQy) [<img src="assets/sdxl-2.png" height="272"/>](https://imgsli.com/MzI2MjQ1) [<img src="assets/sdxl-3.png" height="272"/>](https://imgsli.com/MzI2MjQ3)
+[<img src="assets/flux-1.png" height="272"/>](https://imgsli.com/MzI2MjQ5) [<img src="assets/flux-2.png" height="272"/>](https://imgsli.com/MzI2MjUw) [<img src="assets/flux-3.png" height="272"/>](https://imgsli.com/MzI2MjUx)
 
 <!--## Online Demo-->
 <!--You can try our method through an online demo:-->
@@ -56,7 +55,8 @@ pip install -r requirements.txt
 python inference_invsr.py -i [image folder/image path] -o [result folder] --num_steps 1
 ```
 1. This script will automatically download the pre-trained [noise predictor](https://huggingface.co/OAOA/InvSR/tree/main) and [SD-Turbo](https://huggingface.co/stabilityai/sd-turbo/tree/main). If you have pre-downloaded them manually, please include them via ``--started_ckpt_path`` and ``--sd_path``.
-2. You can freely adjust the sampling steps via ``--num_steps``.
+2. To deal with large images, e.g., 1k---->4k, we recommend adding the option ``--chopping_size 256``.
+3. You can freely adjust the sampling steps via ``--num_steps``.
 
 ### :airplane: Reproducing our paper results
 + Synthetic dataset of ImageNet-Test: [Google Drive](https://drive.google.com/file/d/1PRGrujx3OFilgJ7I6nW7ETIR00wlAl2m/view?usp=sharing).
