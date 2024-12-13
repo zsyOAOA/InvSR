@@ -173,7 +173,7 @@ class InvSamplerSR(BaseSampler):
                 stride= int(idle_pch_size * 0.50),
                 sf=self.configs.basesr.sf,
                 weight_type=self.configs.basesr.chopping.weight_type,
-                extra_bs=1 if self.configs.bs > 1 else self.configs.basesr.chopping.extra_bs,
+                extra_bs=self.configs.basesr.chopping.extra_bs,
             )
             for im_lq_pch, index_infos in im_spliter:
                 target_size = (

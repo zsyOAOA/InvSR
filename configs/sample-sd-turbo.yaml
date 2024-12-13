@@ -7,7 +7,6 @@ basesr:
   chopping:     # for latent diffusion
     pch_size: 128
     weight_type: Gaussian
-    extra_bs: 16      # 16 ----> 26G memory
 
 # VAE settings
 tiled_vae: True
@@ -21,6 +20,9 @@ cfg_scale: 1.0
 
 # sampling settings 
 start_timesteps: 200
+
+# color fixing
+color_fix: ~
 
 # Stable Diffusion 
 base_model: sd-turbo

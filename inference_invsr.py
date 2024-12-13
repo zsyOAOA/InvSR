@@ -20,6 +20,7 @@ def get_parser(**parser_kwargs):
     parser.add_argument("-i", "--in_path", type=str, default="", help="Input path")
     parser.add_argument("-o", "--out_path", type=str, default="", help="Output path")
     parser.add_argument("--bs", type=int, default=1, help="Batchsize for loading image")
+    parser.add_argument("--chopping_bs", type=int, default=8, help="Batchsize for chopped patch")
     parser.add_argument("-t", "--timesteps", type=int, nargs="+", help="The inversed timesteps")
     parser.add_argument("-n", "--num_steps", type=int, default=1, help="Number of inference steps")
     parser.add_argument(
@@ -94,6 +95,10 @@ def get_configs(args):
     configs.tiled_vae = args.tiled_vae
     configs.color_fix = args.color_fix
     configs.basesr.chopping.pch_size = args.chopping_size
+    if args.bs > 1:
+        configs.basesr.chopping.extra_bs = 1
+    else:
+        configs.basesr.chopping.extra_bs = args.chopping_bs
 
     return configs
 
