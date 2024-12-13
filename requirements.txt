@@ -2,6 +2,7 @@ pyiqa==0.1.12
 transformers==4.37.2
 opencv-python==4.10.0.84
 albumentations==1.4.18
+gradio==5.8.0
 bitsandbytes
 sentencepiece
 protobuf
