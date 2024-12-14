@@ -2,7 +2,7 @@
 
 [Zongsheng Yue](https://zsyoaoa.github.io/), [Kang Liao](https://kangliao929.github.io/), [Chen Change Loy](https://www.mmlab-ntu.com/person/ccloy/) 
 
-[![arXiv](https://img.shields.io/badge/arXiv%20paper-2412.09013-b31b1b.svg)](https://arxiv.org/abs/2412.09013) [![Hugging Face](https://img.shields.io/badge/Demo-%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/OAOA/InvSR) <a href="https://colab.research.google.com/drive/1hjgCFnAU4oUUhh9VRfTwsFN1AiIjdcSR?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a> ![visitors](https://visitor-badge.laobi.icu/badge?page_id=zsyOAOA/InvSR) 
+[![arXiv](https://img.shields.io/badge/arXiv%20paper-2412.09013-b31b1b.svg)](https://arxiv.org/abs/2412.09013) [![Replicate](https://img.shields.io/badge/Demo-%F0%9F%9A%80%20Replicate-blue)](https://replicate.com/zsyoaoa/invsr) [![Hugging Face](https://img.shields.io/badge/Demo-%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/OAOA/InvSR) <a href="https://colab.research.google.com/drive/1hjgCFnAU4oUUhh9VRfTwsFN1AiIjdcSR?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a> ![visitors](https://visitor-badge.laobi.icu/badge?page_id=zsyOAOA/InvSR) 
 
 <!--[![Replicate](https://img.shields.io/badge/Demo-%F0%9F%9A%80%20Replicate-blue)](https://replicate.com/cjwbw/resshift)-->
 
@@ -14,6 +14,7 @@
 ><img src="./assets/framework.png" align="middle" width="800">
 ---
 ## Update
+_ **2024.12.14**: Add [![Replicate](https://img.shields.io/badge/Demo-%F0%9F%9A%80%20Replicate-blue)](https://replicate.com/zsyoaoa/invsr).
 - **2024.12.13**: Add [![Hugging Face](https://img.shields.io/badge/Demo-%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/OAOA/InvSR) and <a href="https://colab.research.google.com/drive/1hjgCFnAU4oUUhh9VRfTwsFN1AiIjdcSR?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>.
 - **2024.12.11**: Create this repo.
 
