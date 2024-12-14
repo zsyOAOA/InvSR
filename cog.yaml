@@ -1,0 +1,43 @@
+# Configuration for Cog ⚙️
+# Reference: https://cog.run/yaml
+
+build:
+  # set to true if your model requires a GPU
+  gpu: true
+
+  # a list of ubuntu apt packages to install
+  system_packages:
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+
+  # python version in the form '3.11' or '3.11.4'
+  python_version: "3.10"
+
+  # a list of packages in the format <package-name>==<version>
+  python_packages:
+    - "torch==2.4.0"
+    - "torchvision==0.19.0"
+    - "torchaudio==2.4.0"
+    - "git+https://github.com/huggingface/transformers.git@v4.46.0"
+    - "xformers==0.0.27.post2"
+    - "git+https://github.com/zsyOAOA/InvSR"
+    - "scikit-image==0.24.0"
+    - "albumentations==1.4.3"
+    - "opencv-python==4.10.0.84"
+    - "bitsandbytes==0.45.0"
+    - "sentencepiece==0.2.0"
+    - "protobuf==5.29.1"
+    - "python-box==7.3.0"
+    - "omegaconf==2.3.0"
+    - "loguru==0.7.3"
+    - "einops==0.8.0"
+    - "pydantic==1.10.11"
+    - "accelerate==0.34.2"
+
+  # commands run after the environment is setup
+  run:
+    #- "pip install git+https://github.com/zsyOAOA/InvSR"
+    - "echo env is ready!"
+
+# predict.py defines how predictions are run on your model
+predict: "predict.py:Predictor"
