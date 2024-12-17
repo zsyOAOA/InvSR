@@ -56,14 +56,14 @@ def get_configs(num_steps=1, chopping_size=128, seed=12345):
     configs.model_start.ckpt_path = str(started_ckpt_path)
 
     configs.bs = 1
-    configs.seed = 12345
+    configs.seed = seed
     configs.basesr.chopping.pch_size = chopping_size
     configs.basesr.chopping.extra_bs = 4
 
     return configs
 
 def predict(in_path, num_steps=1, chopping_size=128, seed=12345):
-    configs = get_configs(num_steps=num_steps, chopping_size=chopping_size, seed=12345)
+    configs = get_configs(num_steps=num_steps, chopping_size=chopping_size, seed=seed)
 
     sampler = InvSamplerSR(configs)
 
