@@ -143,5 +143,5 @@ demo = gr.Interface(
     )
 
 demo.queue(max_size=5)
-demo.launch(share=True)
+demo.launch(share=False)
 
