@@ -216,7 +216,7 @@ class LatteTransformer3DModel(ModelMixin, ConfigMixin):
         )
         num_patches = height * width
 
-        hidden_states = self.pos_embed(hidden_states)  # alrady add positional embeddings
+        hidden_states = self.pos_embed(hidden_states)  # already add positional embeddings
 
         added_cond_kwargs = {"resolution": None, "aspect_ratio": None}
         timestep, embedded_timestep = self.adaln_single(
