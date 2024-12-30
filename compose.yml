@@ -8,6 +8,17 @@ services:
       - 7860:7860 # PORT by default is 7860
     volumes:
       - invsr_weights:/invsr/weights/
+    ipc: host # shm
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities:
+                - gpu
 
 volumes:
   invsr_weights:
