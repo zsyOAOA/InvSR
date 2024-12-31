@@ -1,0 +1,34 @@
+services:
+  gradio:
+    container_name: invsr-gradio
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 7860:7860 # PORT by default is 7860
+    volumes:
+      - invsr_weights:/invsr/weights/
+    ipc: host # shm
+    stdin_open: true
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities:
+                - gpu
+
+volumes:
+  invsr_weights:
+    name: invsr_weights
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./weights
+
+networks:
+  default:
+    name: invsr_net

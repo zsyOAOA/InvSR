@@ -64,6 +64,11 @@ You can try our method through an online demo:
 python app.py
 ```
 
+### :whale: Now also available in Docker
+```bash
+docker compose up -d # Go to http://127.0.0.1:7860/
+```
+
 ### :airplane: Reproducing our paper results
 + Synthetic dataset of ImageNet-Test: [Google Drive](https://drive.google.com/file/d/1PRGrujx3OFilgJ7I6nW7ETIR00wlAl2m/view?usp=sharing).
 
