@@ -11,6 +11,8 @@ import gradio as gr
 from pathlib import Path
 from omegaconf import OmegaConf
 from sampler_invsr import InvSamplerSR
+import os
+from tqdm import tqdm
 
 from utils import util_common
 from utils import util_image
@@ -36,12 +38,10 @@ def get_configs(num_steps=1, chopping_size=128, seed=12345):
         ).tolist()
     print(f'Setting timesteps for inference: {configs.timesteps}')
 
-    # path to save Stable Diffusion
-    sd_path = "./weights"
-    util_common.mkdir(sd_path, delete=False, parents=True)
-    configs.sd_pipe.params.cache_dir = sd_path
+    configs.sd_path = "./weights"
+    util_common.mkdir(configs.sd_path, delete=False, parents=True)
+    configs.sd_pipe.params.cache_dir = configs.sd_path
 
-    # path to save noise predictor
     started_ckpt_name = "noise_predictor_sd_turbo_v5.pth"
     started_ckpt_dir = "./weights"
     util_common.mkdir(started_ckpt_dir, delete=False, parents=True)
@@ -62,9 +62,8 @@ def get_configs(num_steps=1, chopping_size=128, seed=12345):
 
     return configs
 
-def predict(in_path, num_steps=1, chopping_size=128, seed=12345):
+def predict_single(in_path, num_steps=1, chopping_size=128, seed=12345):
     configs = get_configs(num_steps=num_steps, chopping_size=chopping_size, seed=seed)
-
     sampler = InvSamplerSR(configs)
 
     out_dir = Path('invsr_output')
@@ -78,70 +77,110 @@ def predict(in_path, num_steps=1, chopping_size=128, seed=12345):
 
     return im_sr, str(out_path)
 
+def process_batch(input_dir, num_steps=1, chopping_size=128, seed=12345, progress=gr.Progress()):
+    input_path = Path(input_dir)
+    output_path = input_path / 'invsr_output'
+    output_path.mkdir(exist_ok=True)
+
+    configs = get_configs(num_steps=num_steps, chopping_size=chopping_size, seed=seed)
+    sampler = InvSamplerSR(configs)
+
+    image_files = list(input_path.glob('*.jpg')) + list(input_path.glob('*.png')) + list(input_path.glob('*.jpeg'))
+    total_files = len(image_files)
+
+    if total_files == 0:
+        return f"No image files found in {input_dir}"
+
+    progress(0, desc="Processing images")
+    for idx, img_path in enumerate(image_files):
+        out_path = output_path / f"{img_path.stem}.png"
+        sampler.inference(str(img_path), out_path=output_path, bs=1)
+        progress((idx + 1)/total_files, desc=f"Processing image {idx + 1}/{total_files}")
+
+    return f"Processed {total_files} images. Results saved in {output_path}"
+
 title = "Arbitrary-steps Image Super-resolution via Diffusion Inversion"
+
+article = r"""
+If you've found InvSR useful for your research or projects, please show your support by ⭐ the <a href='https://github.com/zsyOAOA/InvSR' target='_blank'>Github Repo</a>. Thanks!
+[![GitHub Stars](https://img.shields.io/github/stars/zsyOAOA/InvSR?affiliations=OWNER&color=green&style=social)](https://github.com/zsyOAOA/InvSR)
+---
+If our work is useful for your research, please consider citing:
+```bibtex
+@inproceedings{yue2024invsr,
+  title={Arbitrary-steps Image Super-resolution via Diffusion Inversion},
+  author={Yue, Zongsheng and Liao, Kang and Loy, Chen Change},
+  journal={arXiv preprint arXiv:2412.09013},
+  year={2024}
+}
+```
+📋 **License**
+This project is licensed under <a rel="license" href="https://github.com/zsyOAOA/InvSR/blob/master/LICENSE">S-Lab License 1.0</a>.
+Redistribution and use for non-commercial purposes should follow this license.
+📧 **Contact**
+If you have any questions, please feel free to contact me via <b>zsyzam@gmail.com</b>.
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=zsyOAOA/InvSR)
+"""
 description = r"""
 <b>Official Gradio demo</b> for <a href='https://github.com/zsyOAOA/InvSR' target='_blank'><b>Arbitrary-steps Image Super-resolution via Diffuion Inversion</b></a>.<br>
 🔥 InvSR is an image super-resolution method via Diffusion Inversion, supporting arbitrary sampling steps.<br>
 """
-article = r"""
-If you've found InvSR useful for your research or projects, please show your support by ⭐ the <a href='https://github.com/zsyOAOA/InvSR' target='_blank'>Github Repo</a>. Thanks!
-[![GitHub Stars](https://img.shields.io/github/stars/zsyOAOA/InvSR?affiliations=OWNER&color=green&style=social)](https://github.com/zsyOAOA/InvSR)
 
----
-If our work is useful for your research, please consider citing:
-```bibtex
-@inproceedings{yue2023resshift,
-  title={ResShift: Efficient Diffusion Model for Image Super-resolution by Residual Shifting},
-  author={Yue, Zongsheng and Wang, Jianyi and Loy, Chen Change},
-  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
-  year={2023},
-  volume = {36},
-  pages = {13294--13307},
-}
-```
+with gr.Blocks() as demo:
+    gr.Markdown(f"# {title}")
+    gr.Markdown(description)
 
-📋 **License**
+    with gr.Tabs():
+        with gr.Tab("Single Image"):
+            with gr.Row():
+                with gr.Column():
+                    input_image = gr.Image(type="filepath", label="Input: Low Quality Image")
+                    num_steps = gr.Dropdown(
+                        choices=[1,2,3,4,5],
+                        value=1,
+                        label="Number of steps",
+                    )
+                    chopping_size = gr.Dropdown(
+                        choices=[128, 256],
+                        value=128,
+                        label="Chopping size",
+                    )
+                    seed = gr.Number(value=12345, precision=0, label="Random seed")
+                    process_btn = gr.Button("Process")
 
-This project is licensed under <a rel="license" href="https://github.com/zsyOAOA/InvSR/blob/master/LICENSE">S-Lab License 1.0</a>.
-Redistribution and use for non-commercial purposes should follow this license.
+                with gr.Column():
+                    output_image = gr.Image(type="numpy", label="Output: High Quality Image")
+                    output_file = gr.File(label="Download the output")
 
-📧 **Contact**
+            process_btn.click(
+                fn=predict_single,
+                inputs=[input_image, num_steps, chopping_size, seed],
+                outputs=[output_image, output_file]
+            )
 
-If you have any questions, please feel free to contact me via <b>zsyzam@gmail.com</b>.
-![visitors](https://visitor-badge.laobi.icu/badge?page_id=zsyOAOA/InvSR)
-"""
-demo = gr.Interface(
-    fn=predict,
-    inputs=[
-        gr.Image(type="filepath", label="Input: Low Quality Image"),
-        gr.Dropdown(
-            choices=[1,2,3,4,5],
-            value=1,
-            label="Number of steps",
-            ),
-        gr.Dropdown(
-            choices=[128, 256],
-            value=128,
-            label="Chopping size",
-            ),
-        gr.Number(value=12345, precision=0, label="Ranom seed")
-    ],
-    outputs=[
-        gr.Image(type="numpy", label="Output: High Quality Image"),
-        gr.File(label="Download the output")
-    ],
-    title=title,
-    description=description,
-    article=article,
-    examples=[
-        ['./testdata/RealSet80/29.jpg',  3, 128, 12345],
-        ['./testdata/RealSet80/32.jpg',  1, 128, 12345],
-        ['./testdata/RealSet80/0030.jpg',  1, 128, 12345],
-        ['./testdata/RealSet80/2684538-PH.jpg', 1, 128, 12345],
-        ['./testdata/RealSet80/oldphoto6.png', 1, 128, 12345],
-      ]
-    )
+        with gr.Tab("Batch Processing"):
+            input_dir = gr.Textbox(label="Input Directory Path")
+            batch_num_steps = gr.Dropdown(
+                choices=[1,2,3,4,5],
+                value=1,
+                label="Number of steps",
+            )
+            batch_chopping_size = gr.Dropdown(
+                choices=[128, 256],
+                value=128,
+                label="Chopping size",
+            )
+            batch_seed = gr.Number(value=12345, precision=0, label="Random seed")
+            batch_btn = gr.Button("Process Folder")
+            output_text = gr.Textbox(label="Processing Status")
+
+            batch_btn.click(
+                fn=process_batch,
+                inputs=[input_dir, batch_num_steps, batch_chopping_size, batch_seed],
+                outputs=output_text
+            )
+
+    gr.Markdown(article)
 
 demo.queue(max_size=5)
 demo.launch(share=False)
-
