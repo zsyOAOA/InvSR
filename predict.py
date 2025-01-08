@@ -62,6 +62,14 @@ class Predictor(BasePredictor):
         else:
             self.configs.basesr.chopping.extra_bs = 1
 
+        # Empress Zoia patches settings
+        self.configs.empress_zoia.enable = True
+        self.configs.empress_zoia.patch_size = 256
+        self.configs.empress_zoia.patch_overlap = 32
+        self.configs.empress_zoia.patch_weight_type = 'linear'
+        self.configs.empress_zoia.patch_guidance_scale = 1.5
+        self.configs.empress_zoia.patch_timesteps = [200, 150, 100, 50]
+
     def predict(
         self,
         in_path: Path = Input(description="Input low-quality image"),
