@@ -14,8 +14,8 @@
 ><img src="./assets/framework.png" align="middle" width="800">
 ---
 ## Update
-_ **2025.01.08**: Update gradio demo for batch processing.
-_ **2024.12.14**: Add [![Replicate](https://img.shields.io/badge/Demo-%F0%9F%9A%80%20Replicate-blue)](https://replicate.com/zsyoaoa/invsr).
+- **2025.01.08**: Update gradio demo for batch processing.
+- **2024.12.14**: Add [![Replicate](https://img.shields.io/badge/Demo-%F0%9F%9A%80%20Replicate-blue)](https://replicate.com/zsyoaoa/invsr).
 - **2024.12.13**: Add [![Hugging Face](https://img.shields.io/badge/Demo-%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/OAOA/InvSR) and <a href="https://colab.research.google.com/drive/1hjgCFnAU4oUUhh9VRfTwsFN1AiIjdcSR?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>.
 - **2024.12.11**: Create this repo.
 
