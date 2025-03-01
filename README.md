@@ -1,4 +1,4 @@
-# Arbitrary-steps Image Super-resolution via Diffusion Inversion
+# Arbitrary-steps Image Super-resolution via Diffusion Inversion (CVPR 2025)
 
 [Zongsheng Yue](https://zsyoaoa.github.io/), [Kang Liao](https://kangliao929.github.io/), [Chen Change Loy](https://www.mmlab-ntu.com/person/ccloy/) 
 
@@ -14,6 +14,7 @@
 ><img src="./assets/framework.png" align="middle" width="800">
 ---
 ## Update
+- **2025.03.01**: InvSR has been accepted by CVPR 2025.
 - **2025.01.08**: Update gradio demo for batch processing.
 - **2024.12.14**: Add [![Replicate](https://img.shields.io/badge/Demo-%F0%9F%9A%80%20Replicate-blue)](https://replicate.com/zsyoaoa/invsr).
 - **2024.12.13**: Add [![Hugging Face](https://img.shields.io/badge/Demo-%F0%9F%A4%97%20Hugging%20Face-blue)](https://huggingface.co/spaces/OAOA/InvSR) and <a href="https://colab.research.google.com/drive/1hjgCFnAU4oUUhh9VRfTwsFN1AiIjdcSR?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="google colab logo"></a>.
