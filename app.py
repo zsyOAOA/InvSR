@@ -60,6 +60,14 @@ def get_configs(num_steps=1, chopping_size=128, seed=12345):
     configs.basesr.chopping.pch_size = chopping_size
     configs.basesr.chopping.extra_bs = 4
 
+    # Empress Zoia patches settings
+    configs.empress_zoia.enable = True
+    configs.empress_zoia.patch_size = 256
+    configs.empress_zoia.patch_overlap = 32
+    configs.empress_zoia.patch_weight_type = 'linear'
+    configs.empress_zoia.patch_guidance_scale = 1.5
+    configs.empress_zoia.patch_timesteps = [200, 150, 100, 50]
+
     return configs
 
 def predict_single(in_path, num_steps=1, chopping_size=128, seed=12345):
