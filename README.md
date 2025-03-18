@@ -39,9 +39,9 @@ pip install -r requirements.txt
 [<img src="assets/real-7.png" height="235"/>](https://imgsli.com/MzI2MTU5) [<img src="assets/real-1.png" height="235"/>](https://imgsli.com/MzI2MTUx) [<img src="assets/real-2.png" height="235"/>](https://imgsli.com/MzI2MTUy)
 [<img src="assets/real-4.png" height="361"/>](https://imgsli.com/MzI2MTU0) [<img src="assets/real-6.png" height="361"/>](https://imgsli.com/MzI2MTU3) [<img src="assets/real-5.png" height="361"/>](https://imgsli.com/MzI2MTU1)
 
-<!--### :point_right: General Image Enhancement-->
-<!--[<img src="assets/enhance-1.png" height="246.5"/>](https://imgsli.com/MzI2MTYw) [<img src="assets/enhance-2.png" height="246.5"/>](https://imgsli.com/MzI2MTYy) -->
-<!--[<img src="assets/enhance-3.png" height="207"/>](https://imgsli.com/MzI2MjAx) [<img src="assets/enhance-4.png" height="207"/>](https://imgsli.com/MzI2NTk1) [<img src="assets/enhance-5.png" height="207"/>](https://imgsli.com/MzI2MjA0)-->
+<!-- ### :point_right: General Image Enhancement
+[<img src="assets/enhance-1.png" height="246.5"/>](https://imgsli.com/MzI2MTYw) [<img src="assets/enhance-2.png" height="246.5"/>](https://imgsli.com/MzI2MTYy)
+[<img src="assets/enhance-3.png" height="207"/>](https://imgsli.com/MzI2MjAx) [<img src="assets/enhance-4.png" height="207"/>](https://imgsli.com/MzI2NTk1) [<img src="assets/enhance-5.png" height="207"/>](https://imgsli.com/MzI2MjA0) -->
 
 ### :point_right: AIGC Image Enhancement
 [<img src="assets/sdxl-1.png" height="272"/>](https://imgsli.com/MzI2MjQy) [<img src="assets/sdxl-2.png" height="272"/>](https://imgsli.com/MzI2MjQ1) [<img src="assets/sdxl-3.png" height="272"/>](https://imgsli.com/MzI2MjQ3)
