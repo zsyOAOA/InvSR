@@ -247,7 +247,7 @@ train:
   loss_type: L2
   loss_coef:
     ldif: 1.0
-  timesteps: [200, 100]
+  timesteps: [250, 200, 150, 100]
   num_inference_steps: 5
   # mixed precision
   use_amp: True                
