@@ -91,3 +91,12 @@ model_middle:
     freq_shift: 0
     flip_sin_to_cos: True
     double_z: True
+
+# Empress Zoia patches settings
+empress_zoia:
+  enable: True
+  patch_size: 256
+  patch_overlap: 32
+  patch_weight_type: 'linear'
+  patch_guidance_scale: 1.5
+  patch_timesteps: [200, 150, 100, 50]
