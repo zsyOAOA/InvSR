@@ -133,15 +133,16 @@ class InvSamplerSR(BaseSampler):
         mod_lq = vae_sf // self.configs.basesr.sf * diffusion_sf
         idle_pch_size = self.configs.basesr.chopping.pch_size
 
-        if min(im_cond.shape[-2:]) >= idle_pch_size:
-            pad_h_up = pad_w_left = 0
-        else:
+        total_pad_h_up = total_pad_w_left = 0
+        if min(im_cond.shape[-2:]) < idle_pch_size:
             while min(im_cond.shape[-2:]) < idle_pch_size:
                 pad_h_up = max(min((idle_pch_size - im_cond.shape[-2]) // 2, im_cond.shape[-2]-1), 0)
                 pad_h_down = max(min(idle_pch_size - im_cond.shape[-2] - pad_h_up, im_cond.shape[-2]-1), 0)
                 pad_w_left = max(min((idle_pch_size - im_cond.shape[-1]) // 2, im_cond.shape[-1]-1), 0)
                 pad_w_right = max(min(idle_pch_size - im_cond.shape[-1] - pad_w_left, im_cond.shape[-1]-1), 0)
                 im_cond = F.pad(im_cond, pad=(pad_w_left, pad_w_right, pad_h_up, pad_h_down), mode='reflect')
+                total_pad_h_up += pad_h_up
+                total_pad_w_left += pad_w_left
 
         if im_cond.shape[-2] == idle_pch_size and im_cond.shape[-1] == idle_pch_size:
             target_size = (
@@ -200,9 +201,9 @@ class InvSamplerSR(BaseSampler):
                 im_spliter.update(res_sr_pch, index_infos)
             res_sr = im_spliter.gather()
 
-        pad_h_up *= self.configs.basesr.sf
-        pad_w_left *= self.configs.basesr.sf
-        res_sr = res_sr[:, :, pad_h_up:ori_h_hq+pad_h_up, pad_w_left:ori_w_hq+pad_w_left]
+        total_pad_h_up *= self.configs.basesr.sf
+        total_pad_w_left *= self.configs.basesr.sf
+        res_sr = res_sr[:, :, total_pad_h_up:ori_h_hq+total_pad_h_up, total_pad_w_left:ori_w_hq+total_pad_w_left]
 
         if self.configs.color_fix:
             im_cond_up = F.interpolate(
