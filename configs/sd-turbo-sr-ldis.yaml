@@ -233,11 +233,11 @@ train:
   microbatch: 16 
   num_workers: 4
   prefetch_factor: 2            
-  use_text: True
+  use_text: False
   # optimization settings
   weight_decay: 0               
   ema_rate: 0.999
-  iterations: 200000            # total iterations
+  iterations: 100000            # total iterations
   # logging
   save_freq: 5000
   log_freq: [200, 5000]         # [training loss, training images, val images]
@@ -247,6 +247,8 @@ train:
   loss_type: L2
   loss_coef:
     ldif: 1.0
+    ldis: 0.1
+    llpips: 2.0
   timesteps: [250, 200, 150, 100]
   num_inference_steps: 5
   # mixed precision
