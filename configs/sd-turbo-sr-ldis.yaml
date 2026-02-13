@@ -264,3 +264,12 @@ validate:
   use_ema: True            
   log_freq: 4      # logging frequence
   val_y_channel: True
+
+# Empress Zoia patches settings
+empress_zoia:
+  enable: True
+  patch_size: 256
+  patch_overlap: 32
+  patch_weight_type: 'linear'
+  patch_guidance_scale: 1.5
+  patch_timesteps: [200, 150, 100, 50]
